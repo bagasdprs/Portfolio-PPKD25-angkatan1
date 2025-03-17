@@ -13,6 +13,11 @@ $rowResume = mysqli_fetch_all($selectResume, MYSQLI_ASSOC);
 $selectSkill = mysqli_query($conn, "SELECT * FROM skills");
 $rowsSkill = mysqli_fetch_all($selectSkill, MYSQLI_ASSOC);
 
+$projects = mysqli_query($conn, "SELECT * FROM project ORDER BY id DESC");
+$projects = mysqli_fetch_all($projects, MYSQLI_ASSOC);
+
+$queryBlog = mysqli_query($conn, "SELECT * FROM blog WHERE status = 1 ORDER BY id DESC LIMIT 3");
+$blogs = mysqli_fetch_all($queryBlog, MYSQLI_ASSOC);
 
 
 if (isset($_POST['sent'])) {
@@ -36,10 +41,6 @@ if (isset($_POST['sent'])) {
     }
   }
 }
-
-
-
-
 
 ?>
 
@@ -148,7 +149,7 @@ if (isset($_POST['sent'])) {
         <div class="col-md-6 col-lg-7 pl-lg-5 pb-5">
           <div class="row justify-content-start pb-3">
             <div class="col-md-12 heading-section ftco-animate">
-              <h1 class="big">About</h1>
+              <h1 class="big">ABOUT</h1>
               <h2 class="mb-4">About Me</h2>
               <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
               <ul class="about-info mt-4 px-md-0 px-2">
@@ -178,7 +179,7 @@ if (isset($_POST['sent'])) {
     <div class="container">
       <div class="row justify-content-center pb-5">
         <div class="col-md-10 heading-section text-center ftco-animate">
-          <h1 class="big big-2">Resume</h1>
+          <h1 class="big big-2">RESUME</h1>
           <h2 class="mb-4">Resume</h2>
           <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
         </div>
@@ -204,7 +205,7 @@ if (isset($_POST['sent'])) {
     <div class="container">
       <div class="row justify-content-center py-5 mt-5">
         <div class="col-md-12 heading-section text-center ftco-animate">
-          <h1 class="big big-2">Services</h1>
+          <h1 class="big big-2">SERVICES</h1>
           <h2 class="mb-4">Services</h2>
           <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
         </div>
@@ -234,7 +235,7 @@ if (isset($_POST['sent'])) {
     <div class="container">
       <div class="row justify-content-center pb-5">
         <div class="col-md-12 heading-section text-center ftco-animate">
-          <h1 class="big big-2">Skills</h1>
+          <h1 class="big big-2">SKILLS</h1>
           <h2 class="mb-4">My Skills</h2>
           <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
         </div>
@@ -268,70 +269,32 @@ if (isset($_POST['sent'])) {
     <div class="container">
       <div class="row justify-content-center pb-5">
         <div class="col-md-12 heading-section text-center ftco-animate">
-          <h1 class="big big-2">Projects</h1>
+          <h1 class="big big-2">PROJECTS</h1>
           <h2 class="mb-4">Our Projects</h2>
-          <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
+          <p>Below is the result of work and a work that I made</p>
         </div>
       </div>
       <div class="row">
-        <div class="col-md-4">
-          <div class="project img ftco-animate d-flex justify-content-center align-items-center" style="background-image: url(images/project-4.jpg);">
-            <div class="overlay"></div>
-            <div class="text text-center p-4">
-              <h3><a href="#">Branding &amp; Illustration Design</a></h3>
-              <span>Web Design</span>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-8">
-          <div class="project img ftco-animate d-flex justify-content-center align-items-center" style="background-image: url(images/project-5.jpg);">
-            <div class="overlay"></div>
-            <div class="text text-center p-4">
-              <h3><a href="#">Branding &amp; Illustration Design</a></h3>
-              <span>Web Design</span>
-            </div>
-          </div>
-        </div>
+        <?php
+        $colClass = ["col-md-4", "col-md-8"];
+        $index = 0;
+        ?>
+        <?php
+        foreach ($projects as $index => $project) : ?>
+          <?php $col = $colClass[$index % 2]; ?>
 
-        <div class="col-md-8">
-          <div class="project img ftco-animate d-flex justify-content-center align-items-center" style="background-image: url(images/project-1.jpg);">
-            <div class="overlay"></div>
-            <div class="text text-center p-4">
-              <h3><a href="#">Branding &amp; Illustration Design</a></h3>
-              <span>Web Design</span>
-            </div>
-          </div>
-
-          <div class="project img ftco-animate d-flex justify-content-center align-items-center" style="background-image: url(images/project-6.jpg);">
-            <div class="overlay"></div>
-            <div class="text text-center p-4">
-              <h3><a href="#">Branding &amp; Illustration Design</a></h3>
-              <span>Web Design</span>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="project img ftco-animate d-flex justify-content-center align-items-center" style="background-image: url(images/project-2.jpg);">
-                <div class="overlay"></div>
-                <div class="text text-center p-4">
-                  <h3><a href="#">Branding &amp; Illustration Design</a></h3>
-                  <span>Web Design</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-12">
-              <div class="project img ftco-animate d-flex justify-content-center align-items-center" style="background-image: url(images/project-3.jpg);">
-                <div class="overlay"></div>
-                <div class="text text-center p-4">
-                  <h3><a href="#">Branding &amp; Illustration Design</a></h3>
-                  <span>Web Design</span>
-                </div>
+          <div class="<?= $col ?> mb-3">
+            <div class="project img ftco-animate d-flex justify-content-center align-items-center" style="background-image: url(<?= "assets/uploads/" . $project['photo'] ?>);">
+              <div class="overlay"></div>
+              <div class="text text-center p-4">
+                <h3><a href="#"><?= $project['name_project'] ?></a></h3>
+                <span><?= $project['category'] ?></span>
               </div>
             </div>
           </div>
-        </div>
+
+        <?php endforeach
+        ?>
       </div>
     </div>
   </section>
@@ -341,63 +304,33 @@ if (isset($_POST['sent'])) {
     <div class="container">
       <div class="row justify-content-center mb-5 pb-5">
         <div class="col-md-7 heading-section text-center ftco-animate">
-          <h1 class="big big-2">Blog</h1>
+          <h1 class="big big-2">BLOG</h1>
           <h2 class="mb-4">Our Blog</h2>
           <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
         </div>
       </div>
       <div class="row d-flex">
-        <div class="col-md-4 d-flex ftco-animate">
-          <div class="blog-entry justify-content-end">
-            <a href="single.html" class="block-20" style="background-image: url('images/image_1.jpg');">
-            </a>
-            <div class="text mt-3 float-right d-block">
-              <div class="d-flex align-items-center mb-3 meta">
-                <p class="mb-0">
-                  <span class="mr-2">June 21, 2019</span>
-                  <a href="#" class="mr-2">Admin</a>
-                  <a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a>
-                </p>
+        <?php foreach ($blogs as $blog) : ?>
+          <div class="col-md-4 d-flex ftco-animate">
+            <div class="blog-entry justify-content-end">
+              <a href="single.html" class="block-20" width="100" style="background-image: url(<?= "assets/uploads/" . $blog['photo'] ?>);">
+              </a>
+              <div class="text mt-3 float-right d-block">
+                <div class="d-flex align-items-center mb-3 meta">
+                  <p class="mb-0">
+                    <?php $date = date("M d", strtotime($blog['created_at'])) ?>
+                    <?php $year = date("Y", strtotime($blog['created_at'])) ?>
+                    <span class="mr-2"><?= $date . " , " . $year ?></span>
+                    <a href="#" class="mr-2"><?= $blog['author'] ?></a>
+                    <a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a>
+                  </p>
+                </div>
+                <h3 class="heading"><a href="single.html"><?= $blog['title'] ?></a></h3>
+                <?= $blog['content'], 0, 100 ?>
               </div>
-              <h3 class="heading"><a href="single.html">Why Lead Generation is Key for Business Growth</a></h3>
-              <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
             </div>
           </div>
-        </div>
-        <div class="col-md-4 d-flex ftco-animate">
-          <div class="blog-entry justify-content-end">
-            <a href="single.html" class="block-20" style="background-image: url('images/image_2.jpg');">
-            </a>
-            <div class="text mt-3 float-right d-block">
-              <div class="d-flex align-items-center mb-3 meta">
-                <p class="mb-0">
-                  <span class="mr-2">June 21, 2019</span>
-                  <a href="#" class="mr-2">Admin</a>
-                  <a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a>
-                </p>
-              </div>
-              <h3 class="heading"><a href="single.html">Why Lead Generation is Key for Business Growth</a></h3>
-              <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 d-flex ftco-animate">
-          <div class="blog-entry">
-            <a href="single.html" class="block-20" style="background-image: url('images/image_3.jpg');">
-            </a>
-            <div class="text mt-3 float-right d-block">
-              <div class="d-flex align-items-center mb-3 meta">
-                <p class="mb-0">
-                  <span class="mr-2">June 21, 2019</span>
-                  <a href="#" class="mr-2">Admin</a>
-                  <a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a>
-                </p>
-              </div>
-              <h3 class="heading"><a href="single.html">Why Lead Generation is Key for Business Growth</a></h3>
-              <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-            </div>
-          </div>
-        </div>
+        <?php endforeach ?>
       </div>
     </div>
   </section>
@@ -457,7 +390,7 @@ if (isset($_POST['sent'])) {
     <div class="container">
       <div class="row justify-content-center mb-5 pb-3">
         <div class="col-md-7 heading-section text-center ftco-animate">
-          <h1 class="big big-2">Contact</h1>
+          <h1 class="big big-2">CONTACT</h1>
           <h2 class="mb-4">Contact Me</h2>
           <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
         </div>
